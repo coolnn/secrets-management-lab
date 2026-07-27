@@ -1,3 +1,4 @@
+
 # secrets-management-lab
 
 # Initial problem and the main question..
@@ -67,3 +68,72 @@ First, we run git init in the project folder >
 I hope you got the mechanics of how it works, but if dry text is still hard to take in, same as it is for me, I made an illustration for this too:
 
 <img src="screenshots/gitignorescheme.jpg" width="600">
+
+# Time to act!
+It's time to act! Time to protect our token in the bot.:
+
+First, let me show you an example of how my token was sitting from the very start:
+
+<img src="screenshots/hardcodedtoken.png" width="600">
+
+As we can see, our fictional token is sitting in plain sight right at the very beginning of the code, time to fix this!
+
+First, let's add the imports:
+```
+import os
+from dotenv import load_dotenv
+```
+This will allow our code to actually use and talk to .env files at all.
+
+After this, let's create a .env file and put our tokens in there:
+
+<img src="screenshots/envfile.png" width="600">
+
+We're on the home stretch, all that's left is to fix up our code:
+
+```
+Let's call load_dotenv(), and in the TOKEN fields, instead of the token, let's swap it for os.getenv("TOKEN") and os.getenv("API_KEY")
+```
+
+<img src="screenshots/safetoken.png" width="600">
+
+As you can see on the screenshot, my code is fixed, my tokens are now safe!
+
+This way we protected my code, but let's figure out how you can actually push the code to GitHub without adding the .env file, otherwise what was the point of doing all this?
+
+Let's start, first let's create a local git with the command:
+```
+git init
+```
+
+<img src="screenshots/gitinit.png" width="600">
+
+After that we have a local git ready, next I checked what git is keeping an eye on:
+```
+git status
+```
+
+<img src="screenshots/gitstatus.png" width="600">
+
+As we can see, .env is in the list! This needs to be fixed immediately.
+
+To fix this, we need to create a .gitignore file and write .env into it.
+Command: `echo ".env" > .gitignore`
+
+<img src="screenshots/gitignore.png" width="600">
+
+I successfully created and wrote it in, now it's time to run the test again:
+```
+git status
+```
+
+<img src="screenshots/gitstatus02.png" width="600">
+
+As we can see, git is no longer tracking the .env file, we can rest easy!
+
+# Summary
+To wrap everything up, I hope that you, just like me, now understand how important it is to keep sensitive data out of the code, and how simple it is to actually do it!
+
+Now let's go back to our chat with my friend and send him the updated code again!
+
+<img src="screenshots/02.jpg" width="600">
